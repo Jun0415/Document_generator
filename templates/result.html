@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko" id="no-fouc">
+<head>
+    <meta charset="UTF-8">
+    <title>AI 사업계획서 작성 시스템</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico" /><!-- 파비콘 -->
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" href="/static/css/html5_reset.css" />
+    <link type="text/css" rel="stylesheet" href="/static/css/fs_component.css" />
+    <link type="text/css" rel="stylesheet" href="/static/css/fs_layout.css" />
+    <link type="text/css" rel="stylesheet" href="/static/css/fs_main.css" />
+
+    <style>
+        /* 레이아웃 및 스타일 */
+        .container {
+            display: flex;
+            height: 80vh;
+            background: url("/static/images/background_main.jpg") no-repeat center center fixed;
+            background-size: cover;
+            padding: 40px;
+        }
+        .left, .right {
+            width: 50%;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        .left {
+            border-right: 1px solid #000;
+            overflow-y: auto;
+        }
+        .right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+        .button-group a, .button-group button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: 10px;
+            text-decoration: none;
+            background-color: #5aaeaf;
+            color: #fff;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .button-group a:hover, .button-group button:hover {
+            background-color: #5788cd;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        /* 헤더 스타일 */
+        header#fs_header {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        header#fs_header .fs_head.wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header#fs_header .logo img {
+            height: 50px;
+        }
+        /* 배경 이미지 추가 */
+        .bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("/static/images/background_main.jpg") no-repeat center center;
+            background-size: cover;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+            }
+            .left, .right {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            header#fs_header .fs_head.wrap {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header id="fs_header">
+        <div class="fs_head wrap">
+            <!-- 로고 -->
+            <h1 class="logo"><a href="/"><img src="/static/images/layout/logo-c.png" alt="data linker"></a></h1>
+            <!-- //로고 -->
+        </div>
+    </header>
+    <!-- //헤더 -->
+
+    <!-- 메인 콘텐츠 -->
+    <div id="fs_container_wrap">
+        <!-- 서브 콘텐츠 -->
+        <section class="fs_sub_contents">
+            <!-- 메인 컨텐츠 -->
+            <div class="fs_content" id="fs_content">
+                <div class="bg"></div>
+                <!-- 컨텐츠 바디 -->
+                <div class="con_body">
+                    <div class="solution_box wrap">
+                        <h2 class="con_tit">AI 사업계획서 초안</h2>
+                        <div class="container">
+                            <div class="left">
+                                <!-- 생성된 PDF 파일 임베드 -->
+                                <embed src="{{ pdf_file_url }}" type="application/pdf" width="100%" height="100%">
+                            </div>
+                            <div class="right">
+                                <div class="button-group">
+                                    <a href="{{ file_url }}" download>Docx 파일 다운로드</a>
+                                    <a href="/first">홈으로</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- //컨텐츠 바디 -->
+                </div>
+            </div>
+            <!-- //메인 컨텐츠 -->
+        </section>
+        <!-- //서브 콘텐츠 -->
+    </div>
+    <!-- //메인 콘텐츠 -->
+</body>
+</html>

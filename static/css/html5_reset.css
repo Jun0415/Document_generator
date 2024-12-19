@@ -1,0 +1,34 @@
+html, body, div, span, h1, h2, h3, h4, h5, h6, address, img, strong, sub, sup, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, article, aside, header, footer, nav, section, p {
+	margin:0;padding:0;border:0;letter-spacing:-1px;font-family: "NanumSquareNeo",-apple-system, BlinkMacSystemFont, Arial, sans-serif;
+	word-break: keep-all;line-height:1.5em;
+}
+html {-webkit-text-size-adjust:none;-moz-text-size-adjust:none;}
+body {min-width:320px;font-size:16px;color:#666;-webkit-text-size-adjust:100%;}/* -webkit-text-size-adjust:100%; - 아이폰 가로화면에서 폰트 자동확대 방지 */
+ol, ul {list-style:none;}
+table {border:0;border-spacing:0;}
+table caption {overflow:hidden;width:1px;height:1px;margin:-1px;padding:0;border:0;white-space:nowrap;clip:rect(0 0 0 0);clip-path:inset(50%);}/* position:absolute; 사용시 아이폰 테이블 사이즈 조절안됨 */
+hr {display:block;height:1px;border-top:1px solid #ccc;}
+input, select {vertical-align:middle;}
+/*input:disabled,input:read-only,*/
+/*select:disabled,select:read-only,*/
+/*textarea:disabled,textarea:read-only {background:#e5e5e5;}*/
+input,select,textarea {-webkit-appearance:none;-webkit-border-radius:0;border-radius:0;font-family: "NanumSquareNeo",Arial,sans-serif;}
+input::-ms-input-placeholder,textarea::-ms-input-placeholder {color:#74828c;}
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder {color:#74828c;}
+input::-moz-placeholder,textarea::-moz-placeholder {color:#74828c;}
+input[type="text"]:disabled,input[type="text"]:read-only,
+select[readonly]:disabled,select[readonly]:read-only,
+textarea[type="text"]:disabled,textarea[type="text"]:read-only {background:#e5e5e5;}
+input[type="checkbox"] {-webkit-appearance:checkbox;}
+input[type="radio"] {-webkit-appearance:radio;border-radius:8px;}
+address, em, i {font-style:normal}/* 기울임 방지 */
+button {border:none;cursor:pointer;font-family: "NanumSquareNeo",Arial,sans-serif;}/* 기본보더 삭제, 오버시 기본 화살표로 되므로 커서포인트는 반드시 넣어야함 */
+a, img {vertical-align:top;}
+a {color:inherit;}/* inherit 상위 객체의 값을 그대로 적용(상속) */
+a:link,a:visited {text-decoration:none;}
+a:hover,a:focus,a:active {text-decoration:underline;}
+
+/* 브라우저 공통으로 보이게 */
+* {-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+*:before,
+*:after {-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}

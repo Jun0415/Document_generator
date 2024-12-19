@@ -1,0 +1,125 @@
+/* 네이버 손편지체 */
+@font-face {
+	font-family: 'Handletter';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Handletter.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+/* Exo */
+@font-face {
+	font-family: 'Exo';
+	font-weight: 900;
+	font-display: swap;
+	src: local('Exo Black'), url('Exo-Black.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Exo';
+	font-weight: 800;
+	font-display: swap;
+	src: local('Exo Bold ExtraBold'), url('Exo-ExtraBold.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Exo';
+	font-weight: 700;
+	font-display: swap;
+	src: local('Exo DemeBold'), url('Exo-DemiBold.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Exo';
+	font-weight: 600;
+	font-display: swap;
+	src: local('Exo Medium'), url('Exo-Medium.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Exo';
+	font-weight: 500;
+	font-display: swap;
+	src: local('Exo Regular'), url('Exo-Regular.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Exo';
+	font-weight: 400;
+	font-display: swap;
+	src: local('Exo Light'), url('Exo-Light.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Exo';
+	font-weight: 300;
+	font-display: swap;
+	src: local('Exo ExtraLight'), url('Exo-ExtraLight.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Exo';
+	font-weight: 900;
+	font-display: swap;
+	src: local('Exo Black'), url('Exo-Black.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Exo';
+	font-weight: 800;
+	font-display: swap;
+	src: local('Exo Bold ExtraBold'), url('Exo-ExtraBold.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Exo';
+	font-weight: 700;
+	font-display: swap;
+	src: local('Exo DemeBold'), url('Exo-DemiBold.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Exo';
+	font-weight: 600;
+	font-display: swap;
+	src: local('Exo Medium'), url('Exo-Medium.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Exo';
+	font-weight: 500;
+	font-display: swap;
+	src: local('Exo Regular'), url('Exo-Regular.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Exo';
+	font-weight: 300;
+	font-display: swap;
+	src: local('Exo Light'), url('Exo-Light.otf') format('opentype');
+}
+
+/* 나눔스퀘어 네오 */
+@font-face {
+	font-family: 'NanumSquareNeo';
+	font-weight: 900;
+	font-display: swap;
+	src: local('NanumSquareNeo Heavy'), url('NanumSquareNeo-eHv.woff2') format('woff2'), url('NanumSquareNeo-eHv.woff') format('woff');
+}
+@font-face {
+	font-family: 'NanumSquareNeo';
+	font-weight: 800;
+	font-display: swap;
+	src: local('NanumSquareNeo Extra Bold'), url('NanumSquareNeo-dEb.woff2') format('woff2'), url('NanumSquareNeo-dEb.woff') format('woff');
+}
+@font-face {
+	font-family: 'NanumSquareNeo';
+	font-weight: 600;
+	font-display: swap;
+	src: local('NanumSquareNeo Bold'), url('NanumSquareNeo-cBd.woff2') format('woff2'), url('NanumSquareNeo-cBd.woff') format('woff');
+}
+@font-face {
+	font-family: 'NanumSquareNeo';
+	font-weight: 500;
+	font-display: swap;
+	src: local('NanumSquareNeo Regular'), url('NanumSquareNeo-bRg.woff2') format('woff2'), url('NanumSquareNeo-bRg.woff') format('woff');
+}
+@font-face {
+	font-family: 'NanumSquareNeo';
+	font-weight: 300;
+	font-display: swap;
+	src: local('NanumSquareNeo Light'), url('NanumSquareNeo-aLt.woff2') format('woff2'), url('NanumSquareNeo-aLt.woff') format('woff');
+}
+@font-face {
+	font-family: 'NanumSquareNeo';
+	font-display: swap;
+	src: local('NanumSquareNeo Variable'), url('NanumSquareNeo-Variable.woff2') format('woff2'), url('NanumSquareNeo-Variable.woff') format('woff');
+}
+

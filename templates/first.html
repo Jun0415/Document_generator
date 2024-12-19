@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ko" id="no-fouc">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><!-- 호환성 -->
+    <meta name="format-detection" content="telephone=no,email=no,address=no"><!-- 전화번호, 주소, 메일 등 링크로 인식방지 -->
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1"><!-- 화면맞춤 -->
+    <title>AI 사업계획서 작성 시스템 - 초기 질문</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico" /><!-- 파비콘 -->
+
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" href="/static/css/html5_reset.css" /><!-- 리셋 -->
+    <link type="text/css" rel="stylesheet" href="/static/css/fs_component.css" /><!-- 반복사용 -->
+    <link type="text/css" rel="stylesheet" href="/static/css/fs_layout.css" /><!-- 전체 레이아웃 -->
+    <link type="text/css" rel="stylesheet" href="/static/css/fs_main.css" /><!-- 메인 -->
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 아이콘 사용 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- 스타일 -->
+    <style>
+        #loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255,255,255,0.8);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #ccc;
+            border-top-color: #4a4aef;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .loading-text {
+            font-size: 24px;
+            color: #333;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 추가적인 스타일 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Noto Sans', Arial, sans-serif;
+            background: url("/static/images/background_main.jpg") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .container {
+            display: flex;
+            height: 80vh;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .question-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-slide {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            position: absolute;
+            width: 100%;
+        }
+
+        .active-slide {
+            opacity: 1;
+            position: relative;
+        }
+
+        .question-slide h2 {
+            font-size: 2em;
+            color: #4a4aef;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .question-slide p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            color: #333333;
+            font-weight: 500;
+        }
+
+        .question-slide input[type="text"],
+        .question-slide textarea {
+            width: 100%;
+            padding: 15px;
+            font-size: 1em;
+            margin-bottom: 20px;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            transition: border 0.3s ease-in-out;
+        }
+
+        .question-slide input[type="text"]:focus,
+        .question-slide textarea:focus {
+            border: 1px solid #4a4aef;
+            outline: none;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button-group button {
+            display: flex;
+            align-items: center;
+            padding: 10px 25px;
+            font-size: 1em;
+            border: none;
+            background-color: #6a11cb;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .button-group button:hover {
+            background-color: #5a0eb8;
+            transform: translateY(-2px);
+        }
+
+        .button-group button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 15px;
+            right: 30px;
+            font-size: 1em;
+            color: #666666;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .container {
+                height: auto;
+            }
+
+            .question-container {
+                padding: 20px;
+            }
+
+            .question-slide h2 {
+                font-size: 1.8em;
+            }
+
+            .question-slide p {
+                font-size: 1.1em;
+            }
+
+            .button-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .button-group button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script><!-- jQuery -->
+    <script>
+        // 로딩 화면 제어 함수 - 전역 범위에서 정의
+        function showLoading() {
+            document.getElementById('loading').style.display = 'flex';
+        }
+
+        // 팝업 열기
+        function openPopup() {
+            document.getElementById('pop_info').style.display = 'flex';
+        }
+
+        // 팝업 닫기
+        function closePopup() {
+            document.getElementById('pop_info').style.display = 'none';
+        }
+
+        // 페이지 로드 시 로딩 화면 숨기기
+        window.onload = function() {
+            document.getElementById('loading').style.display = 'none';
+        };
+        
+        $(document).ready(function() {
+            var currentSlide = 1;
+            var totalSlides = 5;
+
+            function showSlide(n) {
+                $('.question-slide').removeClass('active-slide');
+                $('#slide' + n).addClass('active-slide');
+                $('#currentSlide').text(n);
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 1) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
+            }
+
+            $('.next-button').click(function() {
+                nextSlide();
+            });
+
+            $('.prev-button').click(function() {
+                prevSlide();
+            });
+
+            showSlide(currentSlide);
+        });
+    </script>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header id="fs_header">
+        <div class="fs_head wrap">
+            <!-- 로고 -->
+            <h1 class="logo"><a href="/"><img src="/static/images/layout/logo-c.png" alt="data linker"></a></h1>
+            <!-- //로고 -->
+            <div class="login_box">
+                <div class="info_popup">
+                    <a href="#none" class="btn_popup">도움말</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- //헤더 -->
+
+    <!-- 메인 콘텐츠 -->
+    <div id="fs_container_wrap">
+        <!-- 서브 콘텐츠 -->
+        <section class="fs_sub_contents">
+            <!-- 메인 컨텐츠 -->
+            <div class="fs_content" id="fs_content">
+                <!-- 컨텐츠 바디 -->
+                <div class="con_body">
+                    <div class="solution_box wrap">
+                        <h2 class="con_tit">AI 사업계획서 작성 시스템 - 초기 질문</h2>
+                        <form method="post" action="/questions" onsubmit="showLoading()">
+                            <!-- 컨테이너 -->
+                            <div class="container">
+                                <div class="question-container">
+                                    <!-- 진행 바 -->
+                                    <div class="progress-bar">
+                                        질문 <span id="currentSlide">1</span> / 5
+                                    </div>
+                                    <!-- 슬라이드 1 -->
+                                    <div class="question-slide" id="slide1">
+                                        <h2>질문 1</h2>
+                                        <p>아이템의 한 줄 제목을 입력해주세요<br>(00를 위해 000를 접목한 000서비스 "서비스명")</p>
+                                        <textarea name="question_1" rows="4" required></textarea>
+                                        <div class="button-group">
+                                            <span></span>
+                                            <button type="button" class="next-button">다음 <i class="fas fa-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                    <!-- 슬라이드 2 -->
+                                    <div class="question-slide" id="slide2">
+                                        <h2>질문 2</h2>
+                                        <p>아이템의 개발 동기를 입력해주세요<br>(시장에서 00 문제를 발견하고, 이 문제를 해결하기 위해 000 기술을 접목한 서비스를 만듦)</p>
+                                        <textarea name="question_2" rows="4" required></textarea>
+                                        <div class="button-group">
+                                            <button type="button" class="prev-button"><i class="fas fa-chevron-left"></i> 이전</button>
+                                            <button type="button" class="next-button">다음 <i class="fas fa-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                    <!-- 슬라이드 3 -->
+                                    <div class="question-slide" id="slide3">
+                                        <h2>질문 3</h2>
+                                        <p>아이템의 현재 개발 상황에 대해 입력해주세요<br>(예: 서비스 기획 완료, 서비스 론칭 완료, 제품 개발 완료 등)</p>
+                                        <textarea name="question_3" rows="4" required></textarea>
+                                        <div class="button-group">
+                                            <button type="button" class="prev-button"><i class="fas fa-chevron-left"></i> 이전</button>
+                                            <button type="button" class="next-button">다음 <i class="fas fa-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                    <!-- 슬라이드 4 -->
+                                    <div class="question-slide" id="slide4">
+                                        <h2>질문 4</h2>
+                                        <p>대표님과 팀원에 대해 소개를 입력해주세요<br>(대표자는 00 분야의 전문가로 n년의 경험을 통해 이전 문제들을 파악함)</p>
+                                        <textarea name="question_4" rows="4" required></textarea>
+                                        <div class="button-group">
+                                            <button type="button" class="prev-button"><i class="fas fa-chevron-left"></i> 이전</button>
+                                            <button type="button" class="next-button">다음 <i class="fas fa-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                    <!-- 슬라이드 5 -->
+                                    <div class="question-slide" id="slide5">
+                                        <h2>질문 5</h2>
+                                        <p>아이템의 목표 시장을 입력해주세요<br>(TAM: 글로벌 유아용 화장품 시장, SAM: 아시아 유아용 화장품 시장, SOM: 한국 유아용 화장품 시장)</p>
+                                        <textarea name="question_5" rows="4" required></textarea>
+                                        <div class="button-group">
+                                            <button type="button" class="prev-button"><i class="fas fa-chevron-left"></i> 이전</button>
+                                            <button type="submit">제출 <i class="fas fa-paper-plane"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- //컨텐츠 바디 -->
+                </div>
+            </div>
+            <!-- //메인 컨텐츠 -->
+        </section>
+        <!-- //서브 콘텐츠 -->
+    </div>
+    <!-- //메인 콘텐츠 -->
+
+    <!-- 로딩 화면 -->
+    <div id="loading">
+        <div class="spinner"></div>
+        <div class="loading-text">사업계획서 초안 프롬프트 생성 중입니다...</div>
+    </div>
+
+    <!-- 팝업 도움말 -->
+    <div id="pop_info" class="pop_info">
+        <div class="pop_cont">
+            <button type="button" class="btn_close" onclick="closePopup()">X</button>
+            <div class="pop_tit">도움말</div>
+            <div class="txtbox">
+                <p>
+                    서비스에 대한 도움말 내용을 여기에 추가하세요.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 기존 스크립트 -->
+    <script type="text/javascript" src="/static/js/jquery.easing.min.1.4.1.js"></script><!-- Easing -->
+    <script type="text/javascript" src="/static/js/fs_common.js"></script><!-- 공통스크립트 -->
+    <script>
+        // 팝업 열기
+        function openPopup() {
+            document.getElementById('pop_info').style.display = 'flex';
+        }
+
+        // 팝업 닫기
+        function closePopup() {
+            document.getElementById('pop_info').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
