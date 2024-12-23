@@ -1,0 +1,11 @@
+aiofiles
+openai
+fastapi
+werkzeug
+jinja2
+python-docx
+docx2pdf
+Pillow
+mistune
+python-multipart
+uvicorn

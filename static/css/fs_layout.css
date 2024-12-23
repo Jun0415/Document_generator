@@ -1,0 +1,53 @@
+@charset "utf-8";
+@import "font/fs_font.css";
+
+/***********************/
+/* 커스텀하여 사용권장
+ 직접커스텀 : https://matthewlein.com/tools/ceaser
+ 이징 참고표 : https://easings.net/ko
+*/
+
+a:hover {text-decoration: none;}
+a, button {transition:all .4s;-webkit-transition:all .4s;}
+.wrap {max-width:1600px;margin:auto;}
+/***********************/
+
+#fs_wrap {position:relative;}
+
+/* 헤더영역 */
+#fs_header {position:fixed;left:0;top:0;width:100%;z-index:55;}
+.fs_head {display:flex;height:90px;align-items:center;justify-content: space-between;border-bottom:1px solid #ddd;}
+.fs_head .logo a img {max-height:40px;vertical-align: middle;}
+.fs_head .logo a img ~ span {font-size:20px;font-weight:900;}
+.fs_head .login_box {display:flex;}
+.fs_head .login_box .info_popup {margin-right:20px;}
+.fs_head .login_box .info_popup .btn_popup {padding:10px 25px;background:#222;color:#fff;border-radius:5px;font-size:15px;}
+.fs_head .login_box .info_popup .btn_popup:hover {box-shadow: 0 5px 10px rgba(0,0,0,.2);}
+.fs_head .login_box > a {position:relative;padding-left:23px;font-size:15px;color:#999;}
+.fs_head .login_box > a.btn_logout:after {content:'';position:absolute;left:0;top:0;bottom:0;margin:auto;background:url("./../images/layout/ico_logout.png") no-repeat center;width:18px;height:18px;opacity: .7;}
+/* 헤더 효과 */
+#fs_header.active {background:#fff;/*background:rgba(255,255,255,.05);backdrop-filter: blur(8px);-webkit-backdrop-filter: blur(8px);*/box-shadow: 5px 5px 10px rgba(0,0,0,.03);}
+#fs_header.active .fs_head {border-bottom:0;}
+
+
+/* 푸터영역 */
+#fs_footer {text-align: center;font-size:14px;color:#999;}
+
+
+	@media only screen and (max-width:1899px){
+		#fs_footer {position:absolute;left:0;right:0;bottom:20px;}
+	}
+	@media only screen and (max-width:1599px){
+		.wrap {padding:0 30px;}
+	}
+	@media only screen and (max-width:767px){
+		.wrap {padding:0 15px;}
+
+		.fs_head .logo a {display:flex;align-items:center;}
+		.fs_head .logo a img {width: 120px;}
+		.fs_head .logo a img ~ span {font-size:16px;margin-left:5px;}
+		.fs_head .login_box .info_popup .btn_popup {padding:7px 20px;}
+	}
+	@media only screen and (max-width:560px){
+		.fs_head .logo a img {display:none;}
+	}
